@@ -8,6 +8,8 @@ import io.kubernetes.client.openapi.models.V1Pod;
 import io.kubernetes.client.openapi.models.V1PodList;
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
+
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -41,5 +43,11 @@ public class KubeConfigFileClientExample {
     for (V1Pod item : list.getItems()) {
       System.out.println(item.getMetadata().getName());
     }
+  }
+
+  public static ApiClient buildClient(String kubeConfigPath) throws IOException {
+    ApiClient client =
+        ClientBuilder.kubeconfig(KubeConfig.loadKubeConfig(new FileReader(kubeConfigPath))).build();
+    return client;
   }
 }

@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lena-web
+spec:
+  selector:
+    type: lena-web
+    app: app_name
+  ports:
+  - port: 7180
+    targetPort: 7180
+  type: ClusterIP
+

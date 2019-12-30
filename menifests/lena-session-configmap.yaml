@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-lena-session
+data:
+  LENA_SESSION_0_ADDRESS: "lena-session-0.lena-session.default.svc.cluster.local:5180"
+  LENA_SESSION_1_ADDRESS: "lena-session-1.lena-session.default.svc.cluster.local:5180"
+  LENA_MANAGER_ADDRESS: "lena-manager.default.svc.cluster.local:7700"
+  LENA_CONFIG_TEMPLATE_ID: "session-cluster"
+  LENA_SESSION_EXPIRE_SEC: "1800"
+  LENA_JVM_HEAP_SIZE: "256m"

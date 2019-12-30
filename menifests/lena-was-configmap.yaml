@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-lena-was
+data:
+  LENA_CONFIG_TEMPLATE_DOWNLOAD: "Y"
+  LENA_CONFIG_TEMPLATE_ID: "app_name:1"
+  LENA_MANAGER_ADDRESS: "lena-manager.default.svc.cluster.local:7700"
+  LENA_MANAGER_KEY: "p5IsZQME5ORlIf2hbi0ooyXzpHD7Tz6gjc9yYySyU7VxsBD508y0O%2BBa6jiC4aiHLdr%2BXhCYzSNNxWkkKNM1ow%3D%3D"
+  LENA_LICENSE_DOWNLOAD_URL: "manager"
+  LENA_CONTRACT_CODE: "dX89RRxPk6/PBPqbUuYm7w=="
+  JAVA_DOMAIN_CACHE_TTL: "3"
+  LOG_OUTPUT_TYPE: "console"
+  LENA_JVM_HEAP_SIZE: "256m"
+  LENA_JVM_METASPACE_SIZE: "64m"

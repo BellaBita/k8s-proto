@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: lena-manager
+spec:
+  selector:
+    matchLabels:
+      type: lena-manager
+  serviceName: lena-manager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        type: lena-manager
+    spec:
+      containers:
+      - name: lena-manager
+        image: docker.io/lenacloud/lena-manager:1.3.1.0_2-ubuntu16.04-jdk8-openjdk
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7700
+        env:
+        - name: LENA_MANAGER_ADDRESS
+          value: lena-manager.default.svc.cluster.local:7700
+        - name: LENA_JVM_HEAP_SIZE
+          value: "512m"
+        - name: LENA_JVM_METASPACE_SIZE
+          value: "128m"
+        readinessProbe:
+          httpGet:
+            path: /lena
+            port: 7700
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /lena
+            port: 7700
+          initialDelaySeconds: 60
+          periodSeconds: 20
+      terminationGracePeriodSeconds: 10

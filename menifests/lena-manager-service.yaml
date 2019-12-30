@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lena-manager
+spec:
+  selector:
+    type: lena-manager
+  ports:
+  - name: "service"
+    port: 7700
+    targetPort: 7700
+    nodePort: 30078
+  - name: "advertiser"
+    protocol: "UDP"
+    port: 16100
+    targetPort: 16100
+  type: NodePort
