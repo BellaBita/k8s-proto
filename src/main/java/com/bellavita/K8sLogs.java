@@ -48,7 +48,7 @@ public class K8sLogs {
       try {
           ByteStreams.copy(is, out);
         } catch (SocketTimeoutException e) {
-          System.out.println(e.getMessage());
+          System.out.println("##Logging stream ends by " + e.getMessage());
         }
     } else {
       throw new ApiException(404, String.format("Pod '%s' not found in namespace '%s'", podName, namespace));
