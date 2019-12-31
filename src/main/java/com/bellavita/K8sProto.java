@@ -53,17 +53,18 @@ import io.kubernetes.client.util.Yaml;
  * <p>
  * From inside $REPO_DIR/examples
  */
-public class LenaYaml {
+public class K8sProto {
 
   private static String NAME_SPACE = "default";
 
   public static void main(String[] args) {
 
-    LenaYaml lenaYaml = new LenaYaml();
+    K8sProto lenaYaml = new K8sProto();
 
     try {
-      //lenaYaml.createOrReplace("./menifests/lena-session-configmap.yaml", NAME_SPACE);
+      lenaYaml.createOrReplace("./menifests/lena-session-configmap.yaml", NAME_SPACE);
       lenaYaml.createOrReplace("./menifests/lena-session-deploy.yaml", NAME_SPACE);
+      lenaYaml.createOrReplace("./menifests/lena-session-svc.yaml", NAME_SPACE);
     } catch (IOException e) {
       e.printStackTrace();
     } catch (ApiException e) {
@@ -75,7 +76,7 @@ public class LenaYaml {
   }
 
   public Object createOrReplace(String filePath, String namespace) throws IOException, ApiException {
-    ApiClient client = buildClient();
+    ApiClient client = K8sUtils.buildApiClient();
     Configuration.setDefaultApiClient(client);
     Object loaded = (Object) Yaml.load(new File(filePath));
     Object created = null;
@@ -174,12 +175,4 @@ public class LenaYaml {
     return created;
   }
 
-  public ApiClient buildClient() throws IOException {
-    return buildClient(System.getProperty("user.home") + "/.kube/config");
-  }
-
-  public ApiClient buildClient(String kubeConfigPath) throws IOException {
-    ApiClient client = ClientBuilder.kubeconfig(KubeConfig.loadKubeConfig(new FileReader(kubeConfigPath))).build();
-    return client;
-  }
 }
